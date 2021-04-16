@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record model="ir.ui.view" id="account_journal_bank_form_view">
+        <field name="name">account.journal.bank.form</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_bank_journal_form"/>
+        <field name="arch" type="xml">
+            <group position="after">
+                <field name="hide_multa" invisible="1"/>
+                <field name="hide_juros" invisible="1"/>
+                <group>
+                    <group>
+                        <field name="emite_boleto"/>
+                    </group>
+                </group>
+                <notebook position="inside" attrs="{'invisible': [('emite_boleto', '=', False)]}">
+                    <page string="Boleto Bancário">
+                        <notebook>
+                            <page string="Configurações">
+                                <group position="after">
+                                    <group name="bank_inter" string="Bank Inter API">
+                                        <field name="bank_inter_cert"/>
+                                        <field name="bank_inter_key"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Taxas/Prazo">
+                                <group>
+                                    <group string="Multa">
+                                        <field name="codigo_multa"/>
+                                        <field name="dia_carencia_multa" attrs="{'invisible': [('hide_multa', '=', 1)]}"/>
+                                        <field name="taxa_multa" attrs="{'invisible': ['|', ('hide_multa', '=', 1), ('hide_multa', '=', 2)]}"/>
+                                        <field name="valor_multa" attrs="{'invisible': ['|', ('hide_multa', '=', 1), ('hide_multa', '=', 3)]}"/>
+                                    </group>
+                                    <group string="Juros/Mora">
+                                        <field name="codigo_mora"/>
+                                        <field name="dia_carencia_mora" attrs="{'invisible': [('hide_juros', '=', 1)]}"/>
+                                        <field name="taxa_mora" attrs="{'invisible': ['|', ('hide_juros', '=', 1), ('hide_juros', '=', 2)]}"/>
+                                        <field name="valor_mora" attrs="{'invisible': ['|', ('hide_juros', '=', 1), ('hide_juros', '=', 3)]}"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Informações/Mensagens">
+                                <group>
+                                    <field name="local_pagamento"/>
+                                    <field name="instrucao1"/>
+                                    <field name="instrucao2"/>
+                                    <field name="instrucao3"/>
+                                    <field name="instrucao4"/>
+                                </group>
+
+
+
+                            </page>
+                        </notebook>
+                    </page>
+                </notebook>
+            </group>
+        </field>
+    </record>
+</odoo>

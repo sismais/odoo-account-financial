@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <!-- Mail template are declared in a NOUPDATE block
+         so users can freely customize/delete them -->
+    <data noupdate="1">
+        <!--Email template -->
+        <record id="email_template_boleto_invoice" model="mail.template">
+            <field name="name">Boleto: Envio por email</field>
+            <field name="model_id" ref="sismais_account_payment_inter_boleto.model_account_invoice"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="subject">O boleto mensal da sua fatura da ${object.company_id.name}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    Olá ${object.partner_id.name} % if object.partner_id.parent_id: (${object.partner_id.parent_id.name}) % endif,
+
+
+                    Para a sua comodidade, disponibilizamos seu boleto que vencerá daqui no dia ${object.date_due}
+
+                    E-mail: ${object.partner_id.email}
+                    Seu endereço: ${object.company_id.street} ${object.company_id.zip} ${object.company_id.district}
+                    Emissão: ${object.date}
+                    Vencimento: ${object.date_due}
+                    Valor: ${object.amount_total}
+
+                    Ver cobrança atualizada
+
+
+
+                    Você recebeu este e-mail pois é cliente da Sismais Tecnologia
+
+
+                    Sismais Tecnologia
+                    Rua Ranulfo Costa, 59 - Bairro - São Cristovão
+                    46300-000 Caculé/BA
+                </div>
+            </field>
+
+        </record>
+    </data>
+</odoo>

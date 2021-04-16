@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record model="ir.ui.view" id="account_invoice_form_view">
+        <field name="name">account.invoice.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <button name="action_invoice_sent" position="after">
+                <field name="boleto_emitido" invisible="1"/>
+                <field name="pdf_boletos_id" invisible="0" readonly="1"/>
+            </button>
+        </field>
+    </record>
+
+    <record model="ir.actions.server" id="gerar_boleto_action_id">
+        <field name="name">Gerar Boleto</field>
+        <field name="model_id" ref="sismais_account_payment_inter_boleto.model_account_invoice"/>
+        <field name="binding_model_id" ref="sismais_account_payment_inter_boleto.model_account_invoice" />
+        <field name="state">code</field>
+        <field name="code">
+            action=record.action_gerar_boleto()
+        </field>
+    </record>
+    <record model="ir.actions.server" id="pdf_boleto_action_id">
+        <field name="name">Download Boleto</field>
+        <field name="model_id" ref="sismais_account_payment_inter_boleto.model_account_invoice"/>
+        <field name="binding_model_id" ref="sismais_account_payment_inter_boleto.model_account_invoice" />
+        <field name="state">code</field>
+        <field name="code">
+            action=record.action_pdf_boleto()
+        </field>
+    </record>
+    <record model="ir.actions.server" id="enviar_boleto_action_id">
+        <field name="name">Enviar Boleto</field>
+        <field name="model_id" ref="sismais_account_payment_inter_boleto.model_account_invoice"/>
+        <field name="binding_model_id" ref="sismais_account_payment_inter_boleto.model_account_invoice" />
+        <field name="state">code</field>
+        <field name="code">
+            action=record.action_send_boleto()
+        </field>
+    </record>
+    <record model="ir.actions.server" id="baixa_boleto_action_id">
+        <field name="name">Baixa Boleto</field>
+        <field name="model_id" ref="sismais_account_payment_inter_boleto.model_account_invoice"/>
+        <field name="binding_model_id" ref="sismais_account_payment_inter_boleto.model_account_invoice" />
+        <field name="state">code</field>
+        <field name="code">
+            action=record.action_baixa_boleto()
+        </field>
+    </record>
+    <record model="ir.actions.server" id="atualizacao_boleto_action_id">
+        <field name="name">Atualização de Boleto</field>
+        <field name="model_id" ref="sismais_account_payment_inter_boleto.model_account_invoice"/>
+        <field name="binding_model_id" ref="sismais_account_payment_inter_boleto.model_account_invoice" />
+        <field name="state">code</field>
+        <field name="code">
+            action=record.action_atualiza_boleto()
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="baixa_boleto_invoice_form">
+        <field name="name">sismais_account_payment_inter_boleto.baixa_form</field>
+        <field name="model">account.invoice</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h1>Baixar Boleto</h1>
+                    <group>
+                        <group>
+                            <field name="boleto_codigo_baixa"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
