@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record model="ir.ui.view" id="res_partner_form_view">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+                <notebook>
+                    <page string="Classificação">
+                        <group>
+                            <group>
+                                <field name="segmento" required="True" colspan="6"/>
+                                <field name="tipo" required="True" colspan="6"/>
+                                <field name="parceiro_id" colspan="6" attrs="{'invisible': [('tipo', '!=', 'cliente de parceiro')]}"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+        </field>
+    </record>
+</odoo>

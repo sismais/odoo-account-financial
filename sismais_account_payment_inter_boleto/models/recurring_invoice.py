@@ -36,8 +36,9 @@ class RecurringInvoice(models.Model):
         """
         result = super(RecurringInvoice, self).cron_recurring_create_invoice(date_ref=None)
         if True:  # Se no formulário da fatura recorrente estiver marcado para emitir boleto, entra no if.
-            result.action_gerar_boleto()
-            print(result.id)
+            for res in result:
+                res.action_invoice_open()
+                res.action_gerar_boleto()
 
 
 

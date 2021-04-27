@@ -160,6 +160,12 @@ class GenerateBoletoInvoice(models.Model):
         pass
 
     def action_baixa_boleto(self):
+        """
+        Essa função realiza operações de Baixa de boleto na API do banco inter. Ela disponibiliza uma janela com todas
+        as opções de baixa. Ai escolher o codigo da baixa e clicar em salvar, a API do inter é chamada e enviado a
+        requisição.
+        """
+
         journal = self.env['account.journal'].search([('code', '=', 'Inter')])
         with ArquivoCertificado(journal, 'w') as (key, cert):
             self.api = ApiInter(
@@ -172,7 +178,7 @@ class GenerateBoletoInvoice(models.Model):
                     'Ainda não existe um boleto gerado dessa fatura. Impossível imprimir/baixar pdf '
                     'de um boleto inexistente!')
 
-            if self.date < datetime.now().date() + timedelta(days=2):
+            if abs((self.date_invoice - datetime.now().date()).days) <= 2:
                 raise exceptions.UserError(
                     'O boleto em questão tem menos de dois dias que foi emitido. É provavel que '
                     'ainda não esteja registrado. Aguarde pelo menos dois dias para realizar a baixa')
@@ -238,7 +244,7 @@ class GenerateBoletoInvoice(models.Model):
             for i in range(len(resposta['content'])):
                 invoice = self.env['account.invoice'].search([('nossonumero', '=', resposta['content'][i]['nossoNumero'])])
                 # invoice = self.env['account.invoice'].search([('nossonumero', '=', '00663999953')]) # usada para teste
-                if invoice:
+                if invoice and invoice.state == 'open':
                     Payment = self.env['account.payment'].with_context(default_invoice_ids=[(4, invoice.id, False)])
                     payment = Payment.create({
                         'payment_date': datetime.now(),
