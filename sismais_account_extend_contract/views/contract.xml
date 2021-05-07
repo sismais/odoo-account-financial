@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="extend_contract_contract_tree_view">
+        <field name="name">contract.contract tree view (in contract)</field>
+        <field name="model">contract.contract</field>
+        <field name="inherit_id" ref="contract.contract_contract_tree_view"/>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_parceiro"/>
+                <field name="partner_city"/>
+                <field name="partner_uf"/>
+                <field name="valor_total_contrato" sum="Total dos Contratos"/>
+                <field name="data_inicio_contrato"/>
+                <field name="recurring_next_date"/>
+                <field name="partner_tipo"/>
+                <field name="user_id"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Extensão do formulario da linha do contrato-->
+    <record model="ir.ui.view" id="extend_contract_line_form_view">
+        <field name="name" >contract.line form view (in contract)</field>
+        <field name="model">contract.line</field>
+        <field name="inherit_id" ref="contract.contract_line_form_view"/>
+        <field name="arch" type="xml">
+            <group>
+                <field name="account_id"/>
+            </group>
+        </field>
+    </record>
+</odoo>

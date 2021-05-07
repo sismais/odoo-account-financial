@@ -13,7 +13,7 @@
                             <group>
                                 <field name="segmento" required="True" colspan="6"/>
                                 <field name="tipo" required="True" colspan="6"/>
-                                <field name="parceiro_id" colspan="6" attrs="{'invisible': [('tipo', '!=', 'cliente de parceiro')]}"/>
+                                <field name="parceiro_id" colspan="6" required="True"/>
                             </group>
                         </group>
                     </page>

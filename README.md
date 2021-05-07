@@ -19,5 +19,15 @@ Account and financial modules for Odoo ERP, powered or extended by Sismais
 <td>12.0.1.0.0</td>
 <td>Integração de boleto bancário com API do Banco Inter</td>
 </tr>
+<tr>
+<td>sismais_account_extend_contact</td>
+<td>12.0.1.0.0</td>
+<td>Adição de Campos e Funcionalidades</td>
+</tr>
+<tr>
+<td>sismais_account_extend_contract</td>
+<td>12.0.1.0.0</td>
+<td>Adição de Campos e Funcionalidades</td>
+</tr>
 </tbody>
 </table>
